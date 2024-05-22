@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les employés</title>
+
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <i class="bi bi-list mobile-nav-toggle d-lg-none"></i>
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex flex-column justify-content-center">
+        <nav id="navbar" class="navbar nav-menu">
+            <ul>
+                <li><a href="index.php" class="nav-link scrollto "><i class="bx bx-home"></i> <span>Home</span></a></li>
+                <li><a href="listdemp.php" class="nav-link scrollto"><i class="bi bi-card-list"></i> <span>List</span></a></li>
+                <li><a href="ajouter_employe.html" class="nav-link scrollto active"><i class="bi bi-person-fill-add"></i> <span>Ajouter</span></a></li>
+                <li><a href="comptence.php" class="nav-link scrollto "><i class="bi bi-clipboard"></i> <span>list de comepetences</span></a></li>
+                <li><a href="deconnexion.php" class="nav-link scrollto "><i class="bi bi-box-arrow-left"></i> <span>Deconexion</span></a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <div class="p-100 mb-1000 bg-light text-dark">
+        <div class="container py-4 px-3 mx-auto">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container mt-8">
+                                <h2> Enregistrement d'un Nouveau Membre</h2>
+                                <br>
+                                <form action="ajouter-employer.php" method="post" enctype="multipart/form-data" class="text-center">
+       
+                                    <div class="form-group">
+                                        <label for="nom">Nom :</label>
+                                        <input type="text" class="form-control" name="Nom" required >
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="prenom">Prenom:</label>
+                                        <input type="text" class="form-control" name="Prenom" required>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="adresse">Adresse:</label>
+                                        <input type="text" class="form-control" name="Adress" required>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="poste">Poste de travail:</label>
+                                        <input type="text" class="form-control" name="Post" required>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" name="Email" required>
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="userPassword">Mot de passe:</label>
+                                        <input type="password" class="form-control" name="Motspasse" required />
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="numeroTelephone">Numéro de téléphone:</label>
+                                        <input type="text" class="form-control" name="Numtel" required >
+                                    </div>
+                                
+                                    <div class="form-group">
+                                        <label for="codeCIN">Code CIN:</label>
+                                        <input type="text" class="form-control" name="Codcin" required >
+                                    </div>
+                                
+
+                                    <div class="form-group">
+                                    <label for="type">Type:</label>
+                                    <select name="type" id="type" class="form-control" required>
+                                        <option value="E">Employeur</option>
+                                        <option value="C">Chef d'equipe</option>
+
+                                    </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="image">Image:</label>
+                                        <input type="file" class="form-control" name="Image" required>
+                                    </div>
+                                    <div class="form-group" id="idChefContainer">
+                                        <label for="idChef">son chef:</label>
+                                        <select name="Coddir" id="idChef" class="form-control" required>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-outline-success">Ajouter le Membre</button>
+                                    </div>
+                                
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var typeSelect = document.getElementById('type');
+            var idChefSelect = document.getElementById('idChefContainer');
+    
+            // Fonction pour mettre à jour la liste des chefs en fonction du type sélectionné
+            
+            function updateChefsList() {
+    // Effacer les options actuelles
+    idChefSelect.innerHTML = '<label for="idChef">Le nom de  son chef:</label><select name="Coddir" id="idChef" class="form-control" required></select>';
+
+    // Si le type est "Employeur", ne pas afficher la liste des chefs
+    if (typeSelect.value === 'C') {
+        idChefSelect.style.display = 'none';
+    } else {
+        fetch('get_chefs.php')
+            .then(response => response.json())
+            .then(data => {
+                // Logiquement, ici vous devriez utiliser les données JSON pour peupler votre liste déroulante
+                console.log(data);
+                data.forEach(chef => {
+                    var option = document.createElement('option');
+                    option.value = chef.Id;
+                    option.text = chef.Nom + ' ' + chef.Prenom;
+                    document.getElementById('idChef').add(option);
+                });
+            })
+            .catch(error => {
+                // Modifier ici pour afficher la réponse complète en cas d'erreur
+                console.error('Erreur de fetch :', error);
+                return error.text(); // Récupérer le texte complet de la réponse
+            })
+            .then(errorMessage => {
+                // Afficher l'erreur complète (si disponible)
+                console.error('Réponse serveur complète :', errorMessage);
+            });
+        idChefSelect.style.display = 'block';
+    }
+}
+    
+            // Appel initial pour assurer que le champ est correctement affiché lors du chargement de la page
+            updateChefsList();
+    
+            // Ajoutez un écouteur d'événements sur le changement du type
+            typeSelect.addEventListener('change', updateChefsList);
+        });
+    </script>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
